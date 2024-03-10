@@ -1,17 +1,12 @@
 const hre = require("hardhat");
 
 async function main() {
-  const lock = await hre.ethers.deployContract("Lock", [unlockTime], {
-    value: lockedAmount,
-  });
+  const Create = await hre.ethers.getContractFactory("Create");
+  const create = await Create.deploy();
 
-  await lock.waitForDeployment();
+  await create.deployed();
 
-  console.log(
-    `Lock with ${ethers.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
-  );
+  console.log("Lock with 1 ETH deployed to:", create.address);
 }
 
 main().catch((error) => {
